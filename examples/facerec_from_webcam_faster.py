@@ -17,6 +17,14 @@ video_capture = cv2.VideoCapture(0)
 obama_image = face_recognition.load_image_file("obama.jpg")
 obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
 
+charles_image = face_recognition.load_image_file("charles.jpg")
+pooh_image = face_recognition.load_image_file("pooh2.jpg")
+jack_image = face_recognition.load_image_file("jack2.jpg")
+
+charles_face_encoding = face_recognition.face_encodings(charles_image)[0]
+pooh_face_encoding = face_recognition.face_encodings(pooh_image)[0]
+jack_face_encoding = face_recognition.face_encodings(jack_image)[0]
+
 # Initialize some variables
 face_locations = []
 face_encodings = []
@@ -39,11 +47,17 @@ while True:
         face_names = []
         for face_encoding in face_encodings:
             # See if the face is a match for the known face(s)
-            match = face_recognition.compare_faces([obama_face_encoding], face_encoding)
+            match = face_recognition.compare_faces([obama_face_encoding,charles_face_encoding,jack_face_encoding,pooh_face_encoding], face_encoding)
             name = "Unknown"
 
             if match[0]:
                 name = "Barack"
+            elif match[1]:
+                name = "Charles"
+            elif match[2]:
+                name = "Harit"
+            elif match[3]:
+                name = "Pooh"
 
             face_names.append(name)
 

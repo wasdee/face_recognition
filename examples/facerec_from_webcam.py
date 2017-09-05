@@ -15,6 +15,14 @@ video_capture = cv2.VideoCapture(0)
 obama_image = face_recognition.load_image_file("obama.jpg")
 obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
 
+charles_image = face_recognition.load_image_file("charles.jpg")
+pooh_image = face_recognition.load_image_file("pooh.jpg")
+jack_image = face_recognition.load_image_file("jack.jpg")
+
+charles_face_encoding = face_recognition.face_encodings(charles_image)[0]
+pooh_face_encoding = face_recognition.face_encodings(pooh_image)[0]
+jack_face_encoding = face_recognition.face_encodings(jack_image)[0]
+
 while True:
     # Grab a single frame of video
     ret, frame = video_capture.read()
@@ -26,11 +34,17 @@ while True:
     # Loop through each face in this frame of video
     for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
         # See if the face is a match for the known face(s)
-        match = face_recognition.compare_faces([obama_face_encoding], face_encoding)
+        match = face_recognition.compare_faces([obama_face_encoding,charles_face_encoding,jack_face_encoding,pooh_face_encoding], face_encoding)
 
         name = "Unknown"
         if match[0]:
             name = "Barack"
+        elif match[1]:
+            name = "Charles"
+        elif match[2]:
+            name = "Harit"
+        elif match[3]:
+            name = "Pooh"
 
         # Draw a box around the face
         cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
