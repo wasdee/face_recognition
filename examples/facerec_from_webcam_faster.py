@@ -48,16 +48,19 @@ while True:
         for face_encoding in face_encodings:
             # See if the face is a match for the known face(s)
             match = face_recognition.compare_faces([obama_face_encoding,charles_face_encoding,jack_face_encoding,pooh_face_encoding], face_encoding, tolerance=0.45)
-            name = "Unknown"
+            name = ""
 
             if match[0]:
-                name = "Barack"
+                name += "Barack"
             elif match[1]:
-                name = "Charles"
+                name += "Nutchanon"
             elif match[2]:
-                name = "Harit"
+                name += "Harit"
             elif match[3]:
-                name = "Pooh"
+                name += "Pooh"
+
+            if name == "":
+                name = "unknown"
 
             face_names.append(name)
 
